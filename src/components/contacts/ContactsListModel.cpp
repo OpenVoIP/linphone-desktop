@@ -29,13 +29,23 @@
 
 #include "ContactsListModel.hpp"
 
+#include <QNetworkReply>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
 // =============================================================================
 
 using namespace std;
 
+const string ContactsListModel::UI_SECTION("ui");
+
 ContactsListModel::ContactsListModel (QObject *parent) : QAbstractListModel(parent) {
   mLinphoneFriends = CoreManager::getInstance()->getCore()->getFriendsLists().front();
 
+  mConfig = CoreManager::getInstance()->getCore()->getConfig();
   // Clean friends.
   {
     list<shared_ptr<linphone::Friend>> toRemove;
@@ -61,6 +71,28 @@ ContactsListModel::ContactsListModel (QObject *parent) : QAbstractListModel(pare
 
     addContact(contact);
   }
+  // 网络获取联系人
+  QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+  connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+  std::string url = mConfig->getString(UI_SECTION, "remote_url", "") +"/api/pbx/extensionsnamenumber" ;
+  manager->get(QNetworkRequest(QUrl(QString::fromStdString(url))));
+}
+
+void ContactsListModel::replyFinished(QNetworkReply *reply)
+{
+    reply->deleteLater();
+    QByteArray *mDataBuffer = new QByteArray();
+    mDataBuffer->append(reply->readAll());
+    QJsonDocument doc = QJsonDocument::fromJson(*mDataBuffer);
+    QJsonArray array = doc.object().value("list").toArray();
+    for(int i = 0; i < array.size(); ++i){
+      VcardModel *vcardModel = new VcardModel(linphone::Factory::get()->createVcard(), false);
+      vcardModel->setUsername(array[i].toObject().value("Fullname").toString());
+      vcardModel->addSipAddress(array[i].toObject().value("CidNumber").toString());
+
+      ContactModel *contact = new ContactModel(this, vcardModel);
+      addContact(contact);
+    }
 }
 
 int ContactsListModel::rowCount (const QModelIndex &) const {

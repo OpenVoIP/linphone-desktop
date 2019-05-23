@@ -409,6 +409,9 @@ public:
   QString getLogsEmail () const;
   void setLogsEmail (const QString &email);
 
+  QString getRemoteUrl () const;
+  void setRemoteUrl (const QString &url);
+
   // ---------------------------------------------------------------------------
 
   static QString getLogsFolder (const std::shared_ptr<linphone::Config> &config);

@@ -1117,6 +1117,14 @@ Server URL ist nicht konfiguriert.</translation>
         <source>developerSettingsEnabledLabel</source>
         <translation>Entwicklereinstellungen aktivieren</translation>
     </message>
+    <message>
+        <source>remoteContacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remoteApiAddress</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsAudio</name>

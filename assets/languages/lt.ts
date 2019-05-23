@@ -1122,6 +1122,14 @@ Tiesiog, įveskite savo draugo SIP adresą ar naudotojo vardą.</translation>
         <source>developerSettingsEnabledLabel</source>
         <translation>Įjungti kūrėjo nustatymus</translation>
     </message>
+    <message>
+        <source>remoteContacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remoteApiAddress</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsAudio</name>

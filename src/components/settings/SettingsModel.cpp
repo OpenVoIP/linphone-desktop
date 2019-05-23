@@ -1066,6 +1066,17 @@ bool SettingsModel::getLogsEnabled (const shared_ptr<linphone::Config> &config) 
   return config ? config->getInt(UiSection, "logs_enabled", false) : false;
 }
 
+void SettingsModel::setRemoteUrl (const QString &url) {
+  mConfig->setString(UiSection, "remote_url", ::Utils::appStringToCoreString(url));
+}
+
+
+QString SettingsModel::getRemoteUrl () const {
+  return ::Utils::coreStringToAppString(
+    mConfig->getString(UiSection, "remote_url", "")
+  );
+}
+
 // ---------------------------------------------------------------------------
 
 bool SettingsModel::getDeveloperSettingsEnabled () const {

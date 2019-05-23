@@ -81,6 +81,27 @@ TabContainer {
       }
     }
 
+    Form {
+      title: qsTr('remoteContacts')
+      width: parent.width
+
+      FormLine {
+        FormGroup {
+          label: qsTr('remoteApiAddress')
+
+           TextField {
+            readOnly: false
+            text: SettingsModel.remoteUrl
+
+            onEditingFinished: SettingsModel.remoteUrl = text
+          }
+        }
+      }
+
+      FormEmptyLine {}
+    }
+
+
     RequestBlock {
       id: sendLogsBlock
 

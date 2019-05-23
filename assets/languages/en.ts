@@ -1115,6 +1115,14 @@ your friend&apos;s SIP address or username.</translation>
         <translation>Are you sure you want to remove all logs?</translation>
     </message>
     <message>
+        <source>remoteContacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remoteApiAddress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>developerSettingsTitle</source>
         <translation>Developer settings</translation>
     </message>

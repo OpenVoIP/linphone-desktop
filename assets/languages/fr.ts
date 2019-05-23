@@ -1107,6 +1107,14 @@
         <translation type="unfinished"/>
     </message>
     <message>
+        <source>remoteContacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remoteApiAddress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>developerSettingsTitle</source>
         <translation type="unfinished"/>
     </message>

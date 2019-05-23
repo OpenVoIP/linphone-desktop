@@ -26,6 +26,7 @@
 #include <memory>
 
 #include <QAbstractListModel>
+#include <QNetworkAccessManager>
 
 // =============================================================================
 
@@ -40,6 +41,13 @@ class ContactsListModel : public QAbstractListModel {
   friend class SipAddressesModel;
 
   Q_OBJECT;
+
+private:
+    QNetworkAccessManager *manager;
+    static const std::string UI_SECTION;
+    std::shared_ptr<linphone::Config> mConfig;
+public slots:
+    void replyFinished(QNetworkReply *);
 
 public:
   ContactsListModel (QObject *parent = Q_NULLPTR);
